@@ -1,5 +1,5 @@
 import { DefaultValue } from "./defaultValue";
-import { NodeKey, SerializableParam } from "./intefaces";
+import { IEffectContext, NodeKey, SerializableParam } from "./intefaces";
 import { HemanState } from "./state";
 import { HemanValue } from "./value";
 // Effect is called the first time a node is used with a <HemanRoot>
@@ -26,7 +26,7 @@ export type AtomEffect<T> = (param: {
 // atom.d.ts
 export interface AtomOptions<T> {
     key: NodeKey;
-    default: HemanValue<T> | Promise<T> | T;
+    default: HemanValue<T> | (() => Generator<any, T, IEffectContext>) | T;
     effects_UNSTABLE?: ReadonlyArray<AtomEffect<T>>;
     dangerouslyAllowMutability?: boolean;
 }
